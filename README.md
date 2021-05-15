@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# Open-cell-lab
-=======
 # open-cell-lab
 
 A Clojure game about evolution and making organisms.
