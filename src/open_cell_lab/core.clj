@@ -12,4 +12,3 @@
   "main init point"
   []
   (sim-log/start-simulation 0))
-

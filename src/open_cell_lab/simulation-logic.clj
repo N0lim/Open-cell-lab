@@ -1,6 +1,12 @@
 (ns open-cell-lab.simulation-logic)
 (import java.util.Date)
 
+(def cell {:x 0 :y 0 :radius 1})
+
+(def cells (conj [] cell))
+
+(def basic-world [])
+
 (defn start-new-iter
   "main game cycle"
   [world]
