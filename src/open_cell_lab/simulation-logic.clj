@@ -1,9 +1,14 @@
-(ns open-cell-lab.simulation-logic)
+(ns open-cell-lab.simulation-logic
+  "Logic of simulation")
 (import java.util.Date)
 
-(def cell {:x 0 :y 0 :radius 1})
+(defn cell
+  "create cell"
+  [x y radius red green blue]
+  {:x x :y y :radius radius :color {:r red :g green :b blue}})
 
-(def cells (conj [] cell))
+(def cells (conj [] (cell 0 0 100 0 100 200)
+                 (cell 50 50 100 0 100 200)))
 
 (def basic-world [])
 
