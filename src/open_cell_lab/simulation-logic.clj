@@ -2,13 +2,13 @@
   "Logic of simulation")
 (import java.util.Date)
 
-(defn cell
+(defn create-cell
   "create cell"
   [x y radius red green blue]
   {:x x :y y :radius radius :color {:r red :g green :b blue}})
 
-(def cells (conj [] (cell 0 0 100 0 100 200)
-                 (cell 50 50 100 0 100 200)))
+(def cells (conj [] (create-cell 200 200 100 0 100 200)
+                 (create-cell 0 0 100 0 100 200)))
 
 (def basic-world [])
 

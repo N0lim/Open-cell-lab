@@ -9,27 +9,33 @@
 (set! *unchecked-math* :warn-on-boxed)
 (m/use-primitive-operators)
 
-(def main-canvas (c2d/canvas 200 200))
+(def main-canvas (c2d/canvas 1000 1000))
 
 (def main-window (c2d/show-window main-canvas "Simulation"))
 
-(defn circle "draw circle" [canvas x y radius] (c2d/ellipse canvas x y (* radius 2) (* radius 2)))
+(defn circle "draw circle" [canvas x y ^long radius] (c2d/ellipse canvas x y (* radius 2) (* radius 2)))
 
 (defn draw-cell
   [canvas cell]
-  (do
-    (c2d/set-color
-     canvas
-     ((:color cell) :r)
-     ((:color cell) :g)
-     ((:color cell) :b))
-    (circle canvas
-            (:x cell)
-            (:y cell)
-            (:radius cell))))
+  (->
+   (c2d/set-color
+    canvas
+    (vals (:color cell)))
+   (circle (:x cell)
+           (:y cell)
+           (:radius cell))))
+
+(defn draw-several-cell
+  [canvas cells]
+  (loop [cnvs canvas objects-to-draw (count cells)]
+    (if (> objects-to-draw 0) ;;(let [x [1 2 4]] (get x (dec (count x))))
+      (recur (draw-cell cnvs (get cells (dec objects-to-draw)))
+             (dec objects-to-draw)))))
 
 (c2d/with-canvas-> main-canvas
   (c2d/set-background 0 0 0)
-  (draw-cell (sl/cell 0 0 100 0 100 200))
-  (c2d/set-color 100 100 100)
-  (c2d/ellipse 0 100 100 100))
+  (draw-cell {:x 0 :y 0 :radius 100 :color {:r 0 :g 100 :b 200}})
+  (draw-several-cell sl/cells)
+  )
+
+(defn doubler [^long x] (* x 2))
