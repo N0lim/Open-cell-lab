@@ -13,3 +13,7 @@
   "main init point"
   []
   (sim-log/start-simulation 0))
+
+(defn test2
+  ([x y z w] (- x y z w))
+  ([x y z w d] (+ x y z w d)))
