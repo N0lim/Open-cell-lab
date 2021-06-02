@@ -11,8 +11,6 @@
 
 (def main-canvas (c2d/canvas 500 500))
 
-(def main-window (c2d/show-window main-canvas "Simulation"))
-
 (defn circle
   "draw circle"
   [canvas x y ^long radius]
@@ -57,9 +55,23 @@
              (dec objects-to-draw))
       cnvs)))
 
-(c2d/with-canvas-> main-canvas
-  (c2d/set-background 255 255 255)
-  (c2d/set-color 0 0 0)
-  (c2d/rect 100 100 50 50)
-  (draw-several-cells sl/cells)
-  )
+;; (defn speed-test [canvas]
+;;   (loop [cnvs canvas iteration 0]
+;;     (recur (c2d/ellipse (c2d/text
+;;                (c2d/set-color
+;;                 (c2d/set-background cnvs 255 255 255) 0 0 0) iteration 0 10)
+;;             250 250 250 250)
+;;            (inc iteration))))
+
+(defn start-new-window
+  "start new window with simulation"
+  []
+  (do
+    (c2d/show-window main-canvas "Simulation")
+    (c2d/with-canvas-> main-canvas
+      (c2d/set-background 255 255 255)
+      (c2d/set-color 0 0 0)
+      (c2d/rect 100 100 50 50)
+      (draw-several-cells sl/cells)
+      ;; (speed-test)
+      )))
